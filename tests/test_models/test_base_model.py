@@ -36,7 +36,7 @@ class TestBasemodel(unittest.TestCase):
         self.assertEqual(my_model_dict['created_at'], my_model.created_at.isoformat())
         self.assertEqual(my_model_dict["updated_at"], my_model.created_at.isoformat())
 
-	def test_str(self):
+    def test_str(self):
         """Test print function"""
 
         my_model = BaseModel()
