@@ -11,6 +11,7 @@ import re
 import ast
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """
     HBNbCommand interpretor
@@ -82,10 +83,10 @@ class HBNBCommand(cmd.Cmd):
         if len(My_commands) == 0:
             for key, value in My_objects.items():
                 print(str(value))
-        
+
         elif My_commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
-        
+
         else:
             for key, value in My_objects.items():
                 if key.split('.')[0] == My_commands[0]:
@@ -114,7 +115,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** invalid class name **")
         else:
             print("** class name missing **")
-
 
     def do_update(self, arg):
         """
@@ -202,6 +202,7 @@ class HBNBCommand(cmd.Cmd):
         commands when an empty line + ENTER
         """
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
