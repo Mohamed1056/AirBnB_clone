@@ -22,8 +22,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-         Sets an object in the __objects dictionary with a key of 
-         <obj class name>.id.
+         Sets an object in the __objects dictionary
         """
         obj_cls_names = obj.__class__.__name__
 
@@ -34,8 +33,7 @@ class FileStorage:
 
     def all(self):
         """
-        Returns the __objects dictionary. 
-        provides access to all the stored objects.
+        Returns the __objects dictionary.
         """
         return  FileStorage.__objects
 

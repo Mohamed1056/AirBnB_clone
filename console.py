@@ -9,6 +9,7 @@ import json
 import shlex
 import re
 import ast
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -27,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
         else:
-            new_instanse = BaseModel()
+            new_instance = BaseModel()
             new_instance.save()
             print(new_instance.id)
 
@@ -44,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
             print("* instance id missing **")
         else:
             My_obj = storage.all()
-            key = "{}.{}".format(My_commands[o], My_commands[1])
+            key = "{}.{}".format(My_commands[0], My_commands[1])
             if key in My_obj:
                 print(My_obj[key])
             else:
@@ -63,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
             print("* instance id missing **")
         else:
             My_obj = storage.all()
-            key = "{}.{}".format(My_commands[o], My_commands[1])
+            key = "{}.{}".format(My_commands[0], My_commands[1])
             if key in My_obj:
                 del(My_Obj[key])
                 storage.save()
