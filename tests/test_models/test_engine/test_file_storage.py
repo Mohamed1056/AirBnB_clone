@@ -15,6 +15,7 @@ import os
 import json
 import unittest
 
+
 class TestFileStorage_instantiation(unittest.TestCase):
     """
     class for testing instantiation of the FileStorage class.
@@ -81,7 +82,8 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.new(my_city)
         models.storage.new(my_amenity)
         models.storage.new(my_review)
-        self.assertIn("BaseModel." + my_base_model.id, models.storage.all().keys())
+        self.assertIn("BaseModel." + my_base_model.id,
+                      models.storage.all().keys())
         self.assertIn(my_base_model, models.storage.all().values())
         self.assertIn("User." + my_user.id, models.storage.all().keys())
         self.assertIn(my_user, models.storage.all().values())

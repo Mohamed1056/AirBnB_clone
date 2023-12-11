@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     HBNbCommand interpretor
     """
     prompt = "(hbnb) "
-    valid_classes = ["BaseModel"]
+    valid_classes = ["BaseModel", "User"]
 
     def do_create(self, arg):
         """
@@ -29,8 +29,8 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
+            new_instance = eval(f"{commands[0]}()")
+            storage.save()
             print(new_instance.id)
 
     def do_show(self, arg):
@@ -50,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
             if key in My_obj:
                 print(My_obj[key])
             else:
-                print("** instance id missing **")
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """
@@ -75,46 +75,22 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """
         Print the string representation of all instances or a specific class.
+        Usage: <User>.all()
+                <User>.show()
         """
-        My_objects = storage.all()
+        objects = storage.all()
 
-        My_commands = shlex.split(arg)
+        commands = shlex.split(arg)
 
-        if len(My_commands) == 0:
-            for key, value in My_objects.items():
+        if len(commands) == 0:
+            for key, value in objects.items():
                 print(str(value))
-
-        elif My_commands[0] not in self.valid_classes:
+        elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
-
         else:
-            for key, value in My_objects.items():
-                if key.split('.')[0] == My_commands[0]:
+            for key, value in objects.items():
+                if key.split('.')[0] == commands[0]:
                     print(str(value))
-
-    def do_count(self, arg):
-        """
-        Counts the number of instances of a class
-        """
-        My_objects = storage.all()
-
-        My_commands = shlex.split(arg)
-
-        if arg:
-            cls_num = My_commands[0]
-
-        the_count = 0
-
-        if My_commands:
-            if cls_num in self.valid_classes:
-                for obj in My_objects.values():
-                    if obj.__class__.__name__ == cls_num:
-                        the_count += 1
-                print(the_count)
-            else:
-                print("** invalid class name **")
-        else:
-            print("** class name missing **")
 
     def do_update(self, arg):
         """

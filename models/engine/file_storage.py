@@ -12,6 +12,7 @@ from models.city import City
 import os
 import json
 
+
 class FileStorage:
     """
     This class is for storing, serializing and deserializing data
@@ -30,18 +31,16 @@ class FileStorage:
 
         FileStorage.__objects[key] = obj
 
-
     def all(self):
         """
         Returns the __objects dictionary.
         """
-        return  FileStorage.__objects
-
+        return FileStorage.__objects
 
     def save(self):
         """
-        Serializeing the __objects dictionary into 
-        JSON format and saves it to the file specified by __file_path.
+        Serializeing the __objects dictionary into
+        JSON format and saves it
         """
         all_of_objs = FileStorage.__objects
 
@@ -58,7 +57,8 @@ class FileStorage:
         This method is for deserializeing the JSON file
         """
         if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as My_file:
+            with open(FileStorage.__file_path, "r",
+                      encoding="utf-8") as My_file:
                 try:
                     obj_dicts = json.load(My_file)
 
@@ -72,6 +72,7 @@ class FileStorage:
                         FileStorage.__objects[key] = instance
                 except Exception:
                     pass
+
 
 if __name__ == '__main__':
     all_objs = storage.all()
